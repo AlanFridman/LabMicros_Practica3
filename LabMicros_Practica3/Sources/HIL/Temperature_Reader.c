@@ -34,7 +34,6 @@
 /*************************************************************************************************/
 static bool Temp_overlimit;
 static u8 Valor_bit;
-unsigned u8 V_ASCII[]={"0.   "};
 static u8 Temperature;
 
 /*************************************************************************************************/
@@ -52,23 +51,20 @@ static u8 Temperature;
 /*************************************************************************************************/
 /*********************				   Exported Functions					**********************/
 /*************************************************************************************************/
-char Temperature_read(void)
+void Temperature_Init(void)
 {
-	__RESET_WATCHDOG;
-	ADC_Init();  /*Initializes the ADC module*/
-	Valor_bit = Analog_Read(); /*Read the convertion of the ADC*/
-    return Valor_bit;
+    ADC_Init;
 }
 
-char Temperature_BitToTemperature (void)
+char Temperature_read(void)
 {
     unsigned u32 Temperature;
 
-    Temperature_read();
-    
+    Valor_bit = ADC_Read(); /*Read the convertion of the ADC*/
     Temperature=((unsigned u32)(Valor_bit*3300)<<7)/255;;
     Temperature=Temperature>>7;
 }
+
 
 char Temperature_overlimit(void)
 {
@@ -79,11 +75,7 @@ char Temperature_overlimit(void)
 	} else Temp_overlimit=0;
 }
 
-char Temperature_toUART(void)
-{
-    Temperature_BitToTemperature;
-    return &Temperature;
-}
+
 /*************************************************************************************************/
 /*********************				    Private Functions					**********************/
 /*************************************************************************************************/
