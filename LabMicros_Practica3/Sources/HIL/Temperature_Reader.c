@@ -32,8 +32,10 @@
 /*************************************************************************************************/
 /*********************                  Static Variables                    **********************/
 /*************************************************************************************************/
-static char Valor_voltaje;
 static bool Temp_overlimit;
+static u8 Valor_bit;
+unsigned u8 V_ASCII[]={"0.   "};
+
 /*************************************************************************************************/
 /*********************					Global Variables					**********************/
 /*************************************************************************************************/
@@ -53,18 +55,33 @@ char Temperature_read(void)
 {
 	__RESET_WATCHDOG;
 	ADC_Init();  /*Initializes the ADC module*/
-	Valor_voltaje = Analog_Read(); /*Read the convertion of the ADC*/
-	
-	//ECUASION DEL LM35
+	Valor_bit = Analog_Read(); /*Read the convertion of the ADC*/
+    return Valor_bit;
+}
+
+char Temperature_BitToTemperature (void)
+{
+    unsigned u32 Temperature;
+
+    Temperature_read();
+    
+    Temperature=((unsigned u32)(Valor_bit*3300)<<7)/255;;
+    Temperature=Temperature>>7;
 }
 
 char Temperature_overlimit(void)
 {
-	Temperature_read();
-	if(Valor_voltaje > LIMIT_TEMPERATURE)
+	Temperature_BitToTemperature();
+	if(Temperature > LIMIT_TEMPERATURE)
 	{
 	Temp_overlimit=1;
 	} else Temp_overlimit=0;
+}
+
+char Temperature_toUART(void)
+{
+    Temperature_BitToTemperature;
+    Temperature;
 }
 /*************************************************************************************************/
 /*********************				    Private Functions					**********************/
