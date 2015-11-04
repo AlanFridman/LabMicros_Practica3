@@ -35,6 +35,7 @@
 static bool Temp_overlimit;
 static u8 Valor_bit;
 unsigned u8 V_ASCII[]={"0.   "};
+static u8 Temperature;
 
 /*************************************************************************************************/
 /*********************					Global Variables					**********************/
@@ -81,7 +82,7 @@ char Temperature_overlimit(void)
 char Temperature_toUART(void)
 {
     Temperature_BitToTemperature;
-    Temperature;
+    return &Temperature;
 }
 /*************************************************************************************************/
 /*********************				    Private Functions					**********************/
