@@ -65,7 +65,6 @@ char Temperature_read(void)
     Temperature=Temperature>>7;
 }
 
-
 char Temperature_overlimit(void)
 {
 	Temperature_BitToTemperature();
