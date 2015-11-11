@@ -68,17 +68,17 @@ char Temperature_read(void);
 
 /*\name Temperature_overlimit
  *\brief Compares the Temperature from the sensor to the acceptable limit (LIMIT_TEMPERATURE).
- *\param void
- *\return char
+ *\param char
+ *\return bool
  -----------------------------------------------------------------------------------------------*/
-Temperature_overlimit(void);
+bool Temperature_overlimit(u8 decimal);
 
 /*\name DecimaltoASCII
  *\brief Converts the decimal number received, to its voltage value
  *\param char
  *\return void
  -----------------------------------------------------------------------------------------------*/
-
+void DecimaltoASCII(u8 Temperature);
 
 
 /*************************************************************************************************/

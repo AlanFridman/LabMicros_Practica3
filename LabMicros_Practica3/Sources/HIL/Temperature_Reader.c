@@ -69,7 +69,7 @@ char Temperature_read(void)
     return Temperature;
 }
 
-void DecimaltoASCII(unsigned u8 decimal)
+void DecimaltoASCII(u8 decimal)
 {
     V_ASCII[3]=decimal%10+0x30;
     decimal/=10;
@@ -77,13 +77,12 @@ void DecimaltoASCII(unsigned u8 decimal)
     V_ASCII[0]=decimal/10+0x30;
 }
 
-char Temperature_overlimit(void)
+bool Temperature_overlimit(u8 Temp)
 {
-	Temperature_BitToTemperature();
-	if(Temperature > LIMIT_TEMPERATURE)
+	if(Temp > LIMIT_TEMPERATURE)
 	{
-	Temp_overlimit=1;
-	} else Temp_overlimit=0;
+	Temp_overlimit=M_TRUE;
+	} else Temp_overlimit=M_FALSE;
     return Temp_overlimit;
 }
 
