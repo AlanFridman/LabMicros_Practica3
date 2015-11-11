@@ -51,12 +51,12 @@
 /*************************************************************************************************/
 /*********************					Function Prototypes					**********************/
 /*************************************************************************************************/
-/* \name    Analog_Read
+/* \name    ADC_Read
 * \brief    Send the last convertion in u8 
 * \param    void
 * \return   char
 -------------------------------------------------------------------------------------------------*/
-char Analog_Read(void);
+char ADC_Read(void);
 
 /* \name    ADC_Init
 * \brief    Initialize the ADC to read not in continuous mode and with no interrupts. Use the Bus 

@@ -23,7 +23,7 @@
 /*************************************************************************************************/
 /*********************						Defines							**********************/
 /*************************************************************************************************/
-#define LIMIT_TEMPERATURE 20
+#define LIMIT_TEMPERATURE 40
 
 
 
@@ -52,6 +52,26 @@
 /*************************************************************************************************/
 /*********************					Function Prototypes					**********************/
 /*************************************************************************************************/
+/*\name Temperature_Init
+*\brief Initializes the ADC to recieve the voltage from the temperature sensor LM35
+*\param void
+*\return void
+ -----------------------------------------------------------------------------------------------*/
+void Temperature_Init(void);
+
+/*\name Temperature_read
+ *\brief Reads the value from ADC_Read() and adjusts it to the voltage, deviding it into 545. So it doesn't works with decimals, it is multiplied by 100
+ *\param void
+ *\return char
+ -----------------------------------------------------------------------------------------------*/
+char Temperature_read(void);
+
+/*\name Temperature_overlimit
+ *\brief Compares the Temperature from the sensor to the acceptable limit (LIMIT_TEMPERATURE).
+ *\param void
+ *\return char
+ -----------------------------------------------------------------------------------------------*/
+Temperature_overlimit(void);
 
 
 
