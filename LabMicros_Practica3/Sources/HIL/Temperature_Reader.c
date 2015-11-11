@@ -33,7 +33,6 @@
 /*********************                  Static Variables                    **********************/
 /*************************************************************************************************/
 static bool Temp_overlimit;
-static u8 Valor_bit;
 static u8 Temperature;
 static u8 V_ASCII[]={"  . ºC"};
 
@@ -60,7 +59,8 @@ void Temperature_Init(void)
 
 char Temperature_read(void)
 {
-    unsigned u32 Temperature;
+    u32 Temperature;
+    u8 Valor_bit;
 
     Valor_bit = ADC_Read(); /*Read the convertion of the ADC*/
     Temperature=(Valor_bit*100/545);
