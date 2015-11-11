@@ -35,6 +35,8 @@
 static bool Temp_overlimit;
 static u8 Valor_bit;
 static u8 Temperature;
+static u8 V_ASCII[]={"  . ºC"};
+
 
 /*************************************************************************************************/
 /*********************					Global Variables					**********************/
@@ -61,9 +63,18 @@ char Temperature_read(void)
     unsigned u32 Temperature;
 
     Valor_bit = ADC_Read(); /*Read the convertion of the ADC*/
-    Temperature=Valor_bit*100/545;
-    //Temperature=((unsigned u32)(Valor_bit*3300)<<7)/1390; //255;
-    //Temperature=Temperature>>7;
+    Temperature=(Valor_bit*100/545);
+    Temperature=((unsigned u32)(Valor_bit*3300)<<7)/255;
+    Temperature=Temperature>>7;
+    return Temperature;
+}
+
+void DecimaltoASCII(unsigned u8 decimal)
+{
+    V_ASCII[3]=decimal%10+0x30;
+    decimal/=10;
+    V_ASCII[1]=decimal%10+0x30;
+    V_ASCII[0]=decimal/10+0x30;
 }
 
 char Temperature_overlimit(void)
@@ -73,6 +84,7 @@ char Temperature_overlimit(void)
 	{
 	Temp_overlimit=1;
 	} else Temp_overlimit=0;
+    return Temp_overlimit;
 }
 
 
